@@ -1,0 +1,26 @@
+name = "memomesh-frontend"
+main = ".svelte-kit/cloudflare/_worker.js"
+compatibility_date = "2025-05-10"
+
+[assets]
+binding = "ASSETS"
+directory = ".svelte-kit/cloudflare"
+
+[observability]
+enabled = true
+head_sampling_rate = 1
+# 以下のセクションは必要に応じてコメントアウトを外して設定可能です。
+
+# [placement]
+# mode = "smart"
+
+# [vars]
+# MY_VARIABLE = "production_value"
+
+# [[services]]
+# binding = "MY_SERVICE"
+# service = "my-service"
+
+[dev]
+ip = "0.0.0.0"
+port = 8788

@@ -1,0 +1,9 @@
+node_modules
+.env*
+!.env.example
+!.envrc
+target
+.pnpm-store
+
+.direnv
+local-bin

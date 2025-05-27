@@ -1,0 +1,51 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "app/backend",
+      "type": "shell",
+      "command": "nix develop -c bash -c 'cd app/backend && exec $SHELL'",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "dedicated"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "app/frontend",
+      "type": "shell",
+      "command": "nix develop -c bash -c 'cd app/frontend && exec $SHELL'",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "dedicated"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "app/proto",
+      "type": "shell",
+      "command": "nix develop -c bash -c 'cd app/proto && exec $SHELL'",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "dedicated"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "all",
+      "dependsOn": ["app/backend", "app/frontend", "app/proto"],
+      "dependsOrder": "parallel",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "panel": "shared"
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package api.memo.get_data;
+
+// ログインリクエスト
+message QueryParameters {
+  string date = 1; // YYYY-MM-DD形式の日付
+}
+
+message DataList { repeated Data data = 1; }
+
+message Data {
+  string date = 1;     // YYYY-MM-DD形式の日付
+  string contents = 2; // 日付ごとのメモの数
+}

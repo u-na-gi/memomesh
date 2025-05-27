@@ -1,0 +1,17 @@
+[package]
+name = "proto"
+version = "0.1.0"
+
+
+edition.workspace = true
+
+
+[dependencies]
+prost = "0.13"
+# Only necessary if using Protobuf well-known types:
+prost-types = "0.13"
+serde = { version = "1.0", features = ["derive"] }
+
+[build-dependencies]
+prost-build = "0.13.5"
+rayon = "1.8.0"

@@ -1,0 +1,22 @@
+name = "memomesh-backend"
+main = "build/worker/shim.mjs"
+compatibility_date = "2025-05-12"
+
+[build]
+command = "worker-build --dev"
+
+[dev]
+ip = "0.0.0.0"
+port = 8787
+
+
+# devとして一回このまま使おうか
+[[d1_databases]]
+binding = "DB"
+database_name = "memomesh-db"
+database_id = "0cc0cc86-f901-47ea-8408-61171a43e3e3"
+
+
+[observability]
+enabled = true
+head_sampling_rate = 1

@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "huang12zheng.protobuf-helper",
+    "zxh404.vscode-proto3",
+    "esbenp.prettier-vscode",
+    "saoudrizwan.claude-dev",
+    "rust-lang.rust-analyzer",
+    "tamasfe.even-better-toml",
+    "svelte.svelte-vscode"
+  ]
+}

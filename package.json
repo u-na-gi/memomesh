@@ -1,0 +1,16 @@
+{
+  "name": "my-svelte-app-mini",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gen-proto-ts": "sh share/protobuf/.scripts/gen-ts.sh",
+    "clean": " find ./ -name \"node_modules\" | xargs rm -rf ",
+    "tree": "tree -I 'node_modules|target|local-bin' > docs/project-tree.md"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.10.0"
+}

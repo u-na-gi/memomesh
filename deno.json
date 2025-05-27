@@ -1,0 +1,8 @@
+{
+  "workspace": {
+    "members": [
+      "app/backend"
+    ]
+  },
+  "nodeModulesDir": "auto"
+}

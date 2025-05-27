@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package api.memo.create;
+
+message CreateMemoRequest {
+  string parent_id = 1; // 親ID
+  string contents = 2;
+}
+
+message CreateMemoResponse {}

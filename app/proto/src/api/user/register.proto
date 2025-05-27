@@ -1,0 +1,12 @@
+syntax = "proto3";
+package api.user.register;
+
+
+message RegisterRequest {
+  string username = 1; // ユーザー名
+  string password = 2; // パスワード
+}
+
+message RegisterResponse {
+  string message = 2; // 登録成功メッセージ
+}

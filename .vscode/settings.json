@@ -1,0 +1,12 @@
+{
+  "files.associations": {
+    "wrangler.json": "jsonc"
+  },
+  "editor.formatOnSave": true,
+  "rust-analyzer.server.extraEnv": {
+    "PROTOC": "/nix/store/fywz4i7kcrk4ilnc10immagynbvh3p2s-protobuf-24.4/bin/protoc"
+  },
+  "cSpell.words": [
+    "memomesh"
+  ]
+}

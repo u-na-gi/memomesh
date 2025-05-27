@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package api.memo.get_count_by_date;
+
+// ログインリクエスト
+message QueryParameters {
+  string from_date = 1; // YYYY-MM-DD形式の日付
+  string to_date = 2;   // YYYY-MM-DD形式の日付
+}
+
+message CountNotesByDateList {
+  repeated CountNotesByDate count_notes_by_date = 1;
+}
+
+message CountNotesByDate {
+  string date = 1; // YYYY-MM-DD形式の日付
+  int32 count = 2; // 日付ごとのメモの数
+}

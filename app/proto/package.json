@@ -1,0 +1,17 @@
+{
+  "name": "proto",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "gen:deno": "sh .scripts/gen-deno.sh",
+    "gen:ts": "sh .scripts/gen-ts.sh",
+    "gen:rs": "cargo build",
+    "gen": "npm run gen:ts && npm run gen:rs && npm run gen:deno"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "ts-proto": "^2.7.0"
+  }
+}
