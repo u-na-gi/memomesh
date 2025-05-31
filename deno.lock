@@ -1,19 +1,19 @@
 {
   "version": "5",
   "specifiers": {
-    "npm:@bufbuild/protobuf@*": "2.5.1"
+    "npm:@bufbuild/protobuf@*": "2.5.0"
   },
   "npm": {
-    "@bufbuild/protobuf@2.5.1": {
-      "integrity": "sha512-lut4UTvKL8tqtend0UDu7R79/n9jA7Jtxf77RNPbxtmWqfWI4qQ9bTjf7KCS4vfqLmpQbuHr1ciqJumAgJODdw=="
+    "@bufbuild/protobuf@2.5.0": {
+      "integrity": "sha512-nniMblXT+dNyubek2OLKAYJnG/in4tmfS2c5CDnIvqfF9kFlERSG3FCBvmdqerpkWuPv0qhdGKReQ2OqKPG20w=="
     }
   },
   "remote": {
     "https://raw.githubusercontent.com/u-na-gi/scenario-flow/main/scenario-flow/core/context.ts": "77c49d158533bfea9f8d757e1807ac8f044e56c4048d4de5cb57e34bce50bf06",
-    "https://raw.githubusercontent.com/u-na-gi/scenario-flow/main/scenario-flow/core/index.ts": "963320f5d0769d8b40969dd8daf1f59f5443afd18037c8b6a1b6c37db09d00a8",
-    "https://raw.githubusercontent.com/u-na-gi/scenario-flow/main/scenario-flow/core/logger.ts": "4c936075043b6c0f39e7ee437199da4207082b6d11b7ba8bd03cc6c212264142",
-    "https://raw.githubusercontent.com/u-na-gi/scenario-flow/main/scenario-flow/core/type.ts": "e67c4cdd8a34439cfb11c4e43c92000418d0f9e0d409a46ee06176e38eba3e1f",
-    "https://raw.githubusercontent.com/u-na-gi/scenario-flow/main/scenario-flow/mod.ts": "ac248607763ae0265d2b93dbeee4d0c1240ffdd9c51240327841d63742400c68"
+    "https://raw.githubusercontent.com/u-na-gi/scenario-flow/main/scenario-flow/core/index.ts": "cac3c0ba17262c2f616e2dee76e221fb53b389c3ce85b441c383484dc72dff98",
+    "https://raw.githubusercontent.com/u-na-gi/scenario-flow/main/scenario-flow/core/store.ts": "ba02488cfa597f9288eb65eae5f3e69e6ba8a13a751be99981693fe2e8477644",
+    "https://raw.githubusercontent.com/u-na-gi/scenario-flow/main/scenario-flow/core/type.ts": "bbbecc926b2f50cc2f7dd0c8df4e86d837ee89395040c0eae84020380856f042",
+    "https://raw.githubusercontent.com/u-na-gi/scenario-flow/main/scenario-flow/mod.ts": "fd5ed86649cd8a7b2113c51f8bdc9b74d95948e4892f2987d86394a8159bbf1a"
   },
   "workspace": {
     "members": {
