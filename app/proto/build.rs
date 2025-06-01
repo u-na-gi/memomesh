@@ -73,6 +73,36 @@ fn compile_memo_create() -> Result<(), String> {
     )
 }
 
+fn compile_memo_edit() -> Result<(), String> {
+    let out_dir = PathBuf::from("src/generated/api/memo");
+    compile_proto(
+        "src/api/memo/edit.proto",
+        &out_dir,
+        "api.memo.edit.rs",
+        "edit.rs",
+    )
+}
+
+fn compile_memo_delete() -> Result<(), String> {
+    let out_dir = PathBuf::from("src/generated/api/memo");
+    compile_proto(
+        "src/api/memo/delete.proto",
+        &out_dir,
+        "api.memo.delete.rs",
+        "delete.rs",
+    )
+}
+
+fn compiler_forgot_password() -> Result<(), String> {
+    let out_dir = PathBuf::from("src/generated/api/auth/forgot_password");
+    compile_proto(
+        "src/api/auth/forgot_password/forgot_password.proto",
+        &out_dir,
+        "api.auth.forgot_password.rs",
+        "forgot_password.rs",
+    )
+}
+
 fn compile_user_register() -> Result<(), String> {
     let out_dir = PathBuf::from("src/generated/api/user");
     compile_proto(
@@ -84,15 +114,11 @@ fn compile_user_register() -> Result<(), String> {
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // 各protoファイルの処理を並列で実行
-    let (auth_result, memo_result) =
-        rayon::join(|| compile_auth_login(), || compile_memo_get_count_by_date());
-
     // エラーがあった場合は返す
-    auth_result.map_err(|e| {
+    compile_auth_login().map_err(|e| {
         Box::new(std::io::Error::new(std::io::ErrorKind::Other, e)) as Box<dyn std::error::Error>
     })?;
-    memo_result.map_err(|e| {
+    compile_memo_get_count_by_date().map_err(|e| {
         Box::new(std::io::Error::new(std::io::ErrorKind::Other, e)) as Box<dyn std::error::Error>
     })?;
 
@@ -103,7 +129,19 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         Box::new(std::io::Error::new(std::io::ErrorKind::Other, e)) as Box<dyn std::error::Error>
     })?;
 
+    compile_memo_edit().map_err(|e| {
+        Box::new(std::io::Error::new(std::io::ErrorKind::Other, e)) as Box<dyn std::error::Error>
+    })?;
+
+    compile_memo_delete().map_err(|e| {
+        Box::new(std::io::Error::new(std::io::ErrorKind::Other, e)) as Box<dyn std::error::Error>
+    })?;
+
     compile_user_register().map_err(|e| {
+        Box::new(std::io::Error::new(std::io::ErrorKind::Other, e)) as Box<dyn std::error::Error>
+    })?;
+
+    compiler_forgot_password().map_err(|e| {
         Box::new(std::io::Error::new(std::io::ErrorKind::Other, e)) as Box<dyn std::error::Error>
     })?;
 

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package api.memo.edit;
+
+message EditMemoRequest {
+  string memo_id = 1;    // 編集対象のメモID
+  string contents = 2;   // 新しいコンテンツ
+}
+
+message EditMemoResponse {
+  bool success = 1;      // 編集成功フラグ
+  string message = 2;    // エラーメッセージ等
+}

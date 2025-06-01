@@ -1,13 +1,13 @@
 import { Ok, Err, Result } from 'neverthrow';
 import { SessionError } from '$lib/auth/store/error';
-
+import { env } from '$env/dynamic/public';
 /**
  * セッションの有効性をチェックする関数
  * @returns セッションが有効な場合はOk、無効な場合はErrを返す
  */
 export const session = async (): Promise<void> => {
 	// TODO: ドメインは環境変数定義
-	const endpoint = 'http://localhost:8788/api/v1/auth/session';
+	const endpoint = `${env.PUBLIC_API_BASE_URL}/auth/session`;
 
 	try {
 		console.log('Checking session...');

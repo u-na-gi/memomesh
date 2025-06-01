@@ -2,7 +2,7 @@ use axum::http::{HeaderName, HeaderValue};
 use tower_http::cors::{AllowOrigin, CorsLayer};
 use worker::console_log;
 
-const ALLOWED_SUBSTRINGS: [&str; 1] = ["http://localhost:3333"];
+const ALLOWED_SUBSTRINGS: [&str; 2] = ["http://localhost:3333", "http://0.0.0.0:3333"];
 const ALLOWED_HEADERS: [HeaderName; 4] = [
     axum::http::header::AUTHORIZATION,
     axum::http::header::CONTENT_TYPE,

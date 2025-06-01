@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package api.memo.delete;
+
+message DeleteMemoRequest {
+  string memo_id = 1;    // 削除対象のメモID
+}
+
+message DeleteMemoResponse {
+  bool success = 1;      // 削除成功フラグ
+  string message = 2;    // エラーメッセージ等
+}
