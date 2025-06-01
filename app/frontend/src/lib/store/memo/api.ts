@@ -1,11 +1,12 @@
 import { CreateMemoRequest } from '$lib/types/src/api/memo/create';
 import { CountNotesByDateList } from '$lib/types/src/api/memo/get_count_by_date';
+import { env } from '$env/dynamic/public';
 
 export const getDataByDate = async (
 	from_date: string,
 	to_date: string
 ): Promise<CountNotesByDateList> => {
-	const exdpoint = `http://localhost:8788/api/v1/memo/count-notes-by-date?from_date=${from_date}&to_date=${to_date}`;
+	const exdpoint = `${env.PUBLIC_API_BASE_URL}/memo/count-notes-by-date?from_date=${from_date}&to_date=${to_date}`;
 
 	const result = await fetch(exdpoint, {
 		method: 'GET',
@@ -33,7 +34,7 @@ export const getDataByDate = async (
 export const createMemo = async (reqest: CreateMemoRequest): Promise<void> => {
 	const req = CreateMemoRequest.create(reqest);
 	const bytes = CreateMemoRequest.encode(req).finish();
-	const endpoint = 'http://localhost:8788/api/v1/memo/create';
+	const endpoint = 'http://0.0.0.0:8788/api/v1/memo/create';
 
 	const result = await fetch(endpoint, {
 		method: 'POST',
