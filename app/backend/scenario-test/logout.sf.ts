@@ -1,7 +1,7 @@
 import { ScenarioFlow } from "scenario-flow";
 import { login } from "./login.sf.ts";
 
-export const logout = new ScenarioFlow("Logout Frow", login).step(
+export const logout = new ScenarioFlow("Logout Flow", login).step(
   "Logout User",
   async (ctx) => {
     const sessionId = ctx.getContext("session_id") as string;

@@ -4,7 +4,7 @@ import { registerUser } from "./register-user.sf.ts";
 import { RegisterRequest } from "./types/src/api/user/register.ts";
 import { ScenarioFlow } from "scenario-flow";
 
-export const login = new ScenarioFlow("Login Frow", registerUser).step(
+export const login = new ScenarioFlow("Login Flow", registerUser).step(
   "Login User",
   async (ctx) => {
     const payload = ctx.getContext("user") as RegisterRequest;
