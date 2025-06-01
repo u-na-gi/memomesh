@@ -7,3 +7,5 @@ target
 
 .direnv
 local-bin
+
+private-memos
