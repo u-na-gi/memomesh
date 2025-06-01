@@ -83,6 +83,16 @@ fn compile_memo_edit() -> Result<(), String> {
     )
 }
 
+fn compile_memo_delete() -> Result<(), String> {
+    let out_dir = PathBuf::from("src/generated/api/memo");
+    compile_proto(
+        "src/api/memo/delete.proto",
+        &out_dir,
+        "api.memo.delete.rs",
+        "delete.rs",
+    )
+}
+
 fn compiler_forgot_password() -> Result<(), String> {
     let out_dir = PathBuf::from("src/generated/api/auth/forgot_password");
     compile_proto(
@@ -120,6 +130,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     })?;
 
     compile_memo_edit().map_err(|e| {
+        Box::new(std::io::Error::new(std::io::ErrorKind::Other, e)) as Box<dyn std::error::Error>
+    })?;
+
+    compile_memo_delete().map_err(|e| {
         Box::new(std::io::Error::new(std::io::ErrorKind::Other, e)) as Box<dyn std::error::Error>
     })?;
 

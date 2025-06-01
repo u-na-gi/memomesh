@@ -17,7 +17,7 @@ use crate::{
 use crate::{
     api::{
         memo::{
-            create::create_memo_handler, edit::edit_memo_handler,
+            create::create_memo_handler, delete::delete_memo_handler, edit::edit_memo_handler,
             get_count_by_date::get_count_by_date_handler,
         },
         user::register::register_handler,
@@ -43,6 +43,7 @@ pub fn router() -> Router {
         )
         .route("/api/v1/memo/data", get(get_from_date_handler))
         .route("/api/v1/memo/create", post(create_memo_handler))
+        .route("/api/v1/memo/delete", delete(delete_memo_handler))
         .route("/api/v1/memo/edit", post(edit_memo_handler))
         .route("/api/v1/user/register", post(register_handler))
         .layer(from_fn(token_verify_handler))
