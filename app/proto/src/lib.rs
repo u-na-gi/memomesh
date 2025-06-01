@@ -8,6 +8,7 @@ pub mod generated {
         }
         pub mod memo {
             pub mod create;
+            pub mod edit;
             pub mod get_count_by_date;
             pub mod get_data;
         }
