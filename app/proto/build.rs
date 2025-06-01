@@ -94,15 +94,11 @@ fn compile_user_register() -> Result<(), String> {
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // 各protoファイルの処理を並列で実行
-    let (auth_result, memo_result) =
-        rayon::join(|| compile_auth_login(), || compile_memo_get_count_by_date());
-
     // エラーがあった場合は返す
-    auth_result.map_err(|e| {
+    compile_auth_login().map_err(|e| {
         Box::new(std::io::Error::new(std::io::ErrorKind::Other, e)) as Box<dyn std::error::Error>
     })?;
-    memo_result.map_err(|e| {
+    compile_memo_get_count_by_date().map_err(|e| {
         Box::new(std::io::Error::new(std::io::ErrorKind::Other, e)) as Box<dyn std::error::Error>
     })?;
 
