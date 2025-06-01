@@ -10,7 +10,8 @@ RUN apt install -y \
   pkg-config \
   libssl-dev \
   curl \
-  git
+  git \
+  protobuf-compiler
 
 
 RUN cargo install worker-build
@@ -20,6 +21,7 @@ RUN mkdir -p /.rust/target
 ENV CARGO_TARGET_DIR=/.rust/target
 WORKDIR /workspace
 COPY . .
+
 # rust
 RUN cargo build
 WORKDIR /
