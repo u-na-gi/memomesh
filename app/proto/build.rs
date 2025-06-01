@@ -73,6 +73,16 @@ fn compile_memo_create() -> Result<(), String> {
     )
 }
 
+fn compiler_forgot_password() -> Result<(), String> {
+    let out_dir = PathBuf::from("src/generated/api/auth/forgot_password");
+    compile_proto(
+        "src/api/auth/forgot_password/forgot_password.proto",
+        &out_dir,
+        "api.auth.forgot_password.rs",
+        "forgot_password.rs",
+    )
+}
+
 fn compile_user_register() -> Result<(), String> {
     let out_dir = PathBuf::from("src/generated/api/user");
     compile_proto(
@@ -104,6 +114,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     })?;
 
     compile_user_register().map_err(|e| {
+        Box::new(std::io::Error::new(std::io::ErrorKind::Other, e)) as Box<dyn std::error::Error>
+    })?;
+
+    compiler_forgot_password().map_err(|e| {
         Box::new(std::io::Error::new(std::io::ErrorKind::Other, e)) as Box<dyn std::error::Error>
     })?;
 

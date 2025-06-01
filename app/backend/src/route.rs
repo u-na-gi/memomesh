@@ -6,7 +6,10 @@ use axum::{
 
 use crate::{
     api::{
-        auth::{login::login_handler, logout::logout_handler, session::session_handler},
+        auth::{
+            forgot_password::forgot_password_handler, login::login_handler, logout::logout_handler,
+            session::session_handler,
+        },
         memo::get::from_date::get_from_date_handler,
     },
     internal::middleware::token_verify_handler,
@@ -27,6 +30,10 @@ pub fn router() -> Router {
         .route("/api/v1/auth/login", post(login_handler))
         .route("/api/v1/auth/logout", delete(logout_handler))
         .route("/api/v1/auth/session", get(session_handler))
+        .route(
+            "/api/v1/auth/forgot-password",
+            post(forgot_password_handler),
+        )
         .route(
             "/api/v1/memo/count-notes-by-date",
             get(get_count_by_date_handler),

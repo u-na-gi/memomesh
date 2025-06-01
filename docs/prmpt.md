@@ -115,3 +115,15 @@ UTはまだ書かなくて良いです。
 
 
 
+
+
+
+forgot-passwordのapiをはやしてください。
+他のapi同様に、ハンドラーだけで良いです。
+
+foragot-passwordは、認証なしで叩けるエンドポイントです。
+middlewareでbypassするようにしてください
+
+protobufとsynario-testも書いてください。
+
+backendだけでいいです。

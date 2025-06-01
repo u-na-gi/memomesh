@@ -6,6 +6,7 @@ use worker::console_log;
 static SKIP_PATHS: &[&str] = &[
     "/api/v1/auth/login",
     "/api/v1/auth/session",
+    "/api/v1/auth/forgot-password",
     "/api/v1/user/register",
 ];
 

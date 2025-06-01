@@ -1,6 +1,9 @@
 pub mod generated {
     pub mod api {
         pub mod auth {
+            pub mod forgot_password {
+                pub mod forgot_password;
+            }
             pub mod login;
         }
         pub mod memo {
