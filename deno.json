@@ -1,7 +1,8 @@
 {
   "workspace": {
     "members": [
-      "app/backend"
+      "app/backend",
+      "develop/deproma"
     ]
   },
   "nodeModulesDir": "auto"

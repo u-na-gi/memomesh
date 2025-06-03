@@ -2,7 +2,7 @@
   "tasks": {
     "dev": "npx wrangler dev --port 8788 --remote",
     "migrate:remote": "npx wrangler d1 migrations apply memomesh-db --remote",
-    "test": "sfcli ./scenario-test"
+    "test:e2e": "sfcli ./scenario-test"
   },
   "imports": {
     "scenario-flow": "https://raw.githubusercontent.com/u-na-gi/scenario-flow/main/scenario-flow/mod.ts",
