@@ -1,5 +1,10 @@
 pub mod context;
-use axum::{extract::Request, http::StatusCode, middleware::Next, response::{IntoResponse, Response}};
+use axum::{
+    extract::Request,
+    http::StatusCode,
+    middleware::Next,
+    response::{IntoResponse, Response},
+};
 use context::UserContext;
 use worker::console_log;
 
@@ -23,11 +28,15 @@ pub async fn token_verify_handler(mut req: Request, next: Next) -> Response {
     }
     console_log!("Performing token verification for path: {}", path);
 
-    let auth_header = req.headers().get("Authorization")
-    .ok_or((StatusCode::UNAUTHORIZED, "Authorization header not found").into_response())
-    .and_then(|header| {
-        header.to_str().map_err(|_| (StatusCode::UNAUTHORIZED, "Invalid Authorization header").into_response())
-    });
+    let auth_header = req
+        .headers()
+        .get("Authorization")
+        .ok_or((StatusCode::UNAUTHORIZED, "Authorization header not found").into_response())
+        .and_then(|header| {
+            header.to_str().map_err(|_| {
+                (StatusCode::UNAUTHORIZED, "Invalid Authorization header").into_response()
+            })
+        });
 
     let auth_header = match auth_header {
         Ok(header) => header.to_string(),
@@ -42,6 +51,5 @@ pub async fn token_verify_handler(mut req: Request, next: Next) -> Response {
     req.extensions_mut().insert(user);
     next.run(req).await
 }
-
 
 // session middlewareが必要じゃない??

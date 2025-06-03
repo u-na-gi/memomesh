@@ -10,7 +10,7 @@ use crate::{
             forgot_password::forgot_password_handler, login::login_handler, logout::logout_handler,
             session::session_handler,
         },
-        memo::get::from_date::get_from_date_handler,
+        memo::get::{by_id::get_memo_by_id_handler, from_date::get_from_date_handler},
     },
     internal::middleware::token_verify_handler,
 };
@@ -42,14 +42,13 @@ pub fn router() -> Router {
             get(get_count_by_date_handler),
         )
         .route("/api/v1/memo/data", get(get_from_date_handler))
+        .route("/api/v1/memo/id", get(get_memo_by_id_handler))
         .route("/api/v1/memo/create", post(create_memo_handler))
         .route("/api/v1/memo/delete", delete(delete_memo_handler))
         .route("/api/v1/memo/edit", post(edit_memo_handler))
         .route("/api/v1/user/register", post(register_handler))
         .layer(from_fn(token_verify_handler))
-        .layer(create_cors_layer())
-        ;
-        
+        .layer(create_cors_layer());
 
     router
 }
