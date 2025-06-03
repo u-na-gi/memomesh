@@ -35,6 +35,8 @@ export const login = new ScenarioFlow("Login Flow", registerUser).step(
       const [name, value] = cookie.split(";")[0].split("=");
       ctx.addContext(name, `${name}=${value}`);
     });
+
+    ctx.addContext("jwt", data.jwt);
   }
 );
 

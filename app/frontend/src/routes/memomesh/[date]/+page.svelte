@@ -3,20 +3,23 @@
 	import GoBackButton from '$lib/components/GoBackButton.svelte';
 	import SectionHeader from '../components/SectionHeader.svelte';
 	import EmptyAwareList from '$lib/components/EmptyAwareList.svelte';
-	import type { ContentsDateCard } from '../type';
-	import DateCard from '../components/DateCard.svelte';
+	import { onMount } from 'svelte';
+	import { getMemoByDate } from '$lib/store/memo/api';
+	import { page } from '$app/state';
+	import type { MemoList } from '$lib/types/src/api/memo/get_data';
+	import ShortMemoCard from '../components/ShortMemoCard.svelte';
 
-	const getData: ContentsDateCard[] = [
-		{ dateTime: '2025-05-18', contents: 'バナナ' },
-		{ dateTime: '2025-04-28', contents: 'orange' },
-		{ dateTime: '2025-04-29', contents: 'takoyaki' },
-		{ dateTime: '2025-04-30', contents: 'sushi' },
-		{ dateTime: '2025-05-01', contents: 'sashimi' },
-		{ dateTime: '2025-05-02', contents: 'sashimi' },
-		{ dateTime: '2025-05-03', contents: 'sashimi' },
-		{ dateTime: '2025-05-04', contents: 'sashimi' },
-		{ dateTime: '2025-05-05', contents: 'sashimi' }
-	];
+	const routePath = page.url.pathname;
+	const routeDate = routePath.split('/').pop() || '';
+
+	let data: MemoList = { data: [] };
+
+	onMount(async () => {
+		// This is a placeholder for any initialization logic you might need
+		data = await getMemoByDate({
+			date: routeDate
+		});
+	});
 </script>
 
 <Navigation />
@@ -25,11 +28,11 @@
 		<GoBackButton />
 	</div>
 	<SectionHeader />
-	<EmptyAwareList items={getData}>
-		{#each getData as data}
-			<DateCard date={data.dateTime}>
-				{data.contents}
-			</DateCard>
+	<EmptyAwareList items={data.data}>
+		{#each data.data as memos}
+			<ShortMemoCard date={memos.date} id={memos.id}>
+				{memos.shortContents}
+			</ShortMemoCard>
 		{/each}
 	</EmptyAwareList>
 </main>

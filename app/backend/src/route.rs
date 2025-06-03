@@ -47,7 +47,9 @@ pub fn router() -> Router {
         .route("/api/v1/memo/edit", post(edit_memo_handler))
         .route("/api/v1/user/register", post(register_handler))
         .layer(from_fn(token_verify_handler))
-        .layer(create_cors_layer());
+        .layer(create_cors_layer())
+        ;
+        
 
     router
 }

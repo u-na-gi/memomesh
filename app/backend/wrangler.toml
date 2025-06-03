@@ -15,7 +15,7 @@ port = 8787
 binding = "DB"
 database_name = "memomesh-db"
 database_id = "0cc0cc86-f901-47ea-8408-61171a43e3e3"
-
+preview_database_id = "d5ab2a45-680c-481f-b168-7f443d09d587"
 
 [observability]
 enabled = true
