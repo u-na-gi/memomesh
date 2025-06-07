@@ -1,4 +1,4 @@
-use axum::http::{HeaderName, HeaderValue};
+use axum::http::{HeaderName, HeaderValue, Method};
 use tower_http::cors::{AllowOrigin, CorsLayer};
 use worker::console_log;
 
@@ -33,6 +33,7 @@ pub fn create_cors_layer() -> CorsLayer {
                     .any(|&substring| origin_str.contains(substring))
             }))
             .allow_headers(ALLOWED_HEADERS)
+            .allow_credentials(true)
     } else {
         console_log!("開発環境: すべてのオリジンを許可");
         // 開発環境: すべてのオリジンを許可
@@ -42,6 +43,14 @@ pub fn create_cors_layer() -> CorsLayer {
             }))
             .allow_headers(ALLOWED_HEADERS)
             .allow_credentials(true)
+            .allow_methods([
+                Method::GET,
+                Method::POST,
+                Method::PUT,
+                Method::DELETE,
+                Method::OPTIONS,
+                Method::PATCH,
+            ])
     };
 
     cors

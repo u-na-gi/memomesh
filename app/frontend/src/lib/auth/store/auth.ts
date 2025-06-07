@@ -52,9 +52,9 @@ export const login = async (req: LoginRequest): Promise<Result<LoginResponse, Lo
 export const logout = async (): Promise<Result<void, LogoutError>> => {
 	try {
 		// ログアウトエンドポイントを呼び出し
-		const endpoint = `${env.PUBLIC_API_BASE_URL}/api/v1/auth/logout`;
+		const endpoint = `${env.PUBLIC_API_BASE_URL}/auth/logout`;
 		const result = await fetch(endpoint, {
-			method: 'POST',
+			method: 'DELETE',
 			credentials: 'include'
 		});
 
