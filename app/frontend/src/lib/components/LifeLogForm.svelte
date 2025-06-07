@@ -1,7 +1,7 @@
 <script lang="ts">
 	import BaseForm from '$lib/components/BaseForm.svelte';
 	import { createMemo } from '$lib/store/memo/api';
-	import { setItemToLocalStorage } from '$lib/utils/local-storage';
+	import { setItemToLocalStorage, removeItemFromLocalStorage } from '$lib/utils/local-storage';
 	import MarkdownPreview from './MarkdownPreview.svelte';
 
 	export let content = '';
@@ -18,6 +18,10 @@
 				contents: content,
 				parentId: parentId
 			});
+			// API成功後にローカルストレージからコンテンツを削除
+			removeItemFromLocalStorage(contentKey);
+			// history.back()を実行
+			history.back();
 		} catch (error) {
 			console.error(error);
 		} finally {

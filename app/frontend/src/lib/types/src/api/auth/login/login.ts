@@ -11,7 +11,7 @@ export const protobufPackage = "api.auth.login";
 
 /** ログインリクエスト */
 export interface LoginRequest {
-  username: string;
+  email: string;
   password: string;
 }
 
@@ -21,13 +21,13 @@ export interface LoginResponse {
 }
 
 function createBaseLoginRequest(): LoginRequest {
-  return { username: "", password: "" };
+  return { email: "", password: "" };
 }
 
 export const LoginRequest: MessageFns<LoginRequest> = {
   encode(message: LoginRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.username !== "") {
-      writer.uint32(10).string(message.username);
+    if (message.email !== "") {
+      writer.uint32(10).string(message.email);
     }
     if (message.password !== "") {
       writer.uint32(18).string(message.password);
@@ -47,7 +47,7 @@ export const LoginRequest: MessageFns<LoginRequest> = {
             break;
           }
 
-          message.username = reader.string();
+          message.email = reader.string();
           continue;
         }
         case 2: {
@@ -69,15 +69,15 @@ export const LoginRequest: MessageFns<LoginRequest> = {
 
   fromJSON(object: any): LoginRequest {
     return {
-      username: isSet(object.username) ? globalThis.String(object.username) : "",
+      email: isSet(object.email) ? globalThis.String(object.email) : "",
       password: isSet(object.password) ? globalThis.String(object.password) : "",
     };
   },
 
   toJSON(message: LoginRequest): unknown {
     const obj: any = {};
-    if (message.username !== "") {
-      obj.username = message.username;
+    if (message.email !== "") {
+      obj.email = message.email;
     }
     if (message.password !== "") {
       obj.password = message.password;
@@ -90,7 +90,7 @@ export const LoginRequest: MessageFns<LoginRequest> = {
   },
   fromPartial<I extends Exact<DeepPartial<LoginRequest>, I>>(object: I): LoginRequest {
     const message = createBaseLoginRequest();
-    message.username = object.username ?? "";
+    message.email = object.email ?? "";
     message.password = object.password ?? "";
     return message;
   },

@@ -6,7 +6,7 @@ import { goto } from '$app/navigation';
 import { env } from '$env/dynamic/public';
 
 const loginRequestSchema = zod.object({
-	username: zod.string().min(1, 'Username is required'),
+	email: zod.string().email('Valid email is required').min(1, 'Email is required'),
 	password: zod.string().min(1, 'Password is required')
 });
 

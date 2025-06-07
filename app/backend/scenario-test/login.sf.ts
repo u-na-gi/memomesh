@@ -9,7 +9,7 @@ export const login = new ScenarioFlow("Login Flow", registerUser).step(
   async (ctx) => {
     const payload = ctx.getContext("user") as RegisterRequest;
     const req: LoginRequest = {
-      username: payload.username,
+      email: payload.email,
       password: payload.password,
     };
     const res = await ctx.fetcher({

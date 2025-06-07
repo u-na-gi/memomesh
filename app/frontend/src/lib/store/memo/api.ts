@@ -36,7 +36,7 @@ export const getDataByDate = async (
 export const createMemo = async (reqest: CreateMemoRequest): Promise<void> => {
 	const req = CreateMemoRequest.create(reqest);
 	const bytes = CreateMemoRequest.encode(req).finish();
-	const endpoint = 'http://0.0.0.0:8788/api/v1/memo/create';
+	const endpoint = `${env.PUBLIC_API_BASE_URL}/memo/create`;
 
 	const result = await fetch(endpoint, {
 		method: 'POST',
