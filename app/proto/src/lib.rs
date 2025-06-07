@@ -10,6 +10,7 @@ pub mod generated {
             pub mod create;
             pub mod delete;
             pub mod edit;
+            pub mod get_by_id;
             pub mod get_count_by_date;
             pub mod get_data;
         }

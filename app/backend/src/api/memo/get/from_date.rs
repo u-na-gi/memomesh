@@ -4,7 +4,7 @@ use crate::{
 use axum::{body::Body, extract::Query, response::Response};
 use chrono::NaiveDate;
 
-use proto::generated::api::memo::get_data::{Data, DataList, QueryParameters};
+use proto::generated::api::memo::get_data::{Memo, MemoList, QueryParameters};
 use std::ops::Add;
 use worker::console_log;
 
@@ -24,19 +24,22 @@ pub async fn get_from_date_handler(
         date.to_string()
     );
 
-    let mock_data = DataList {
+    let mock_data = MemoList {
         data: vec![
-            Data {
+            Memo {
                 date: date.to_string(),
-                contents: "Sample data for the given date".to_string(),
+                id: "dsadwadwadwarfs32".to_string(),
+                short_contents: "short1...".to_string(),
             },
-            Data {
+            Memo {
                 date: date.add(chrono::Duration::days(1)).to_string(),
-                contents: "Sample data for the next day".to_string(),
+                id: "54534523f535".to_string(),
+                short_contents: "short2...".to_string(),
             },
-            Data {
+            Memo {
                 date: date.add(chrono::Duration::days(2)).to_string(),
-                contents: "Sample data for two days later".to_string(),
+                id: "odfheuiawosrfy8e9iasrfh".to_string(),
+                short_contents: "short3...".to_string(),
             },
         ],
     };

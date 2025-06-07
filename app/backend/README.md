@@ -5,6 +5,9 @@
 - db作成
 ```shell
 npx wrangler d1 create memomesh-db
+
+# preview版
+npx wrangler d1 create memomesh-db-preview
 ```
 
 

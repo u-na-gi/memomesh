@@ -10,8 +10,8 @@ import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 export const protobufPackage = "api.user.register";
 
 export interface RegisterRequest {
-  /** ユーザー名 */
-  username: string;
+  /** メールアドレス */
+  email: string;
   /** パスワード */
   password: string;
 }
@@ -22,13 +22,13 @@ export interface RegisterResponse {
 }
 
 function createBaseRegisterRequest(): RegisterRequest {
-  return { username: "", password: "" };
+  return { email: "", password: "" };
 }
 
 export const RegisterRequest: MessageFns<RegisterRequest> = {
   encode(message: RegisterRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.username !== "") {
-      writer.uint32(10).string(message.username);
+    if (message.email !== "") {
+      writer.uint32(10).string(message.email);
     }
     if (message.password !== "") {
       writer.uint32(18).string(message.password);
@@ -48,7 +48,7 @@ export const RegisterRequest: MessageFns<RegisterRequest> = {
             break;
           }
 
-          message.username = reader.string();
+          message.email = reader.string();
           continue;
         }
         case 2: {
@@ -70,15 +70,15 @@ export const RegisterRequest: MessageFns<RegisterRequest> = {
 
   fromJSON(object: any): RegisterRequest {
     return {
-      username: isSet(object.username) ? globalThis.String(object.username) : "",
+      email: isSet(object.email) ? globalThis.String(object.email) : "",
       password: isSet(object.password) ? globalThis.String(object.password) : "",
     };
   },
 
   toJSON(message: RegisterRequest): unknown {
     const obj: any = {};
-    if (message.username !== "") {
-      obj.username = message.username;
+    if (message.email !== "") {
+      obj.email = message.email;
     }
     if (message.password !== "") {
       obj.password = message.password;
@@ -91,7 +91,7 @@ export const RegisterRequest: MessageFns<RegisterRequest> = {
   },
   fromPartial<I extends Exact<DeepPartial<RegisterRequest>, I>>(object: I): RegisterRequest {
     const message = createBaseRegisterRequest();
-    message.username = object.username ?? "";
+    message.email = object.email ?? "";
     message.password = object.password ?? "";
     return message;
   },

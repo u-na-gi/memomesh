@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package api.memo.get_by_id;
+
+message QueryParameters {
+  string id = 1; // メモのID
+}
+
+message GetMemoByIdResponse {
+  string id = 1;         // メモのID
+  string date = 2;       // YYYY-MM-DD形式の日付
+  string contents = 3;   // メモの全内容
+  string parent_id = 4;  // 親ID
+  string created_at = 5; // 作成日時
+  string updated_at = 6; // 更新日時
+}

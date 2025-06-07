@@ -7,9 +7,10 @@ message QueryParameters {
   string date = 1; // YYYY-MM-DD形式の日付
 }
 
-message DataList { repeated Data data = 1; }
+message MemoList { repeated Memo data = 1; }
 
-message Data {
-  string date = 1;     // YYYY-MM-DD形式の日付
-  string contents = 2; // 日付ごとのメモの数
+message Memo {
+  string date = 1;           // YYYY-MM-DD形式の日付
+  string id = 2;             // メモのID
+  string short_contents = 3; // 日付ごとのメモの数
 }

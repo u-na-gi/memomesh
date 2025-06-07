@@ -20,13 +20,13 @@ export const deleteMemo = new ScenarioFlow("Delete Memo Flow", createMemo).step(
     req = DeleteMemoRequest.create(req);
     const bytes = DeleteMemoRequest.encode(req).finish();
 
-    const sessionCookie = ctx.getContext("session") as string;
+    const jwt = ctx.getContext("jwt") as string;
     const res = await ctx.fetcher({
       method: "DELETE",
       path: "/memo/delete",
       headers: {
         "Content-Type": "application/octet-stream",
-        Cookie: sessionCookie || "",
+         Authorization: `Bearer ${jwt}`,
       },
       body: bytes.buffer as ArrayBuffer,
     });

@@ -2,6 +2,7 @@
   "tasks": {
     "dev": "npx wrangler dev --port 8788 --remote",
     "migrate:remote": "npx wrangler d1 migrations apply memomesh-db --remote",
+    "migrate:preview": "npx wrangler d1 migrations apply memomesh-db --remote --preview",
     "test:e2e": "sfcli ./scenario-test"
   },
   "imports": {
