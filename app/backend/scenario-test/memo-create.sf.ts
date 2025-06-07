@@ -16,13 +16,13 @@ export const createMemo = new ScenarioFlow("Create Memo Flow", login).step(
     req = CreateMemoRequest.create(req);
     const bytes = CreateMemoRequest.encode(req).finish();
 
-    const sessionCookie = ctx.getContext("session") as string;
+    const jwt = ctx.getContext("jwt") as string;
     const res = await ctx.fetcher({
       method: "POST",
       path: "/memo/create",
       headers: {
         "Content-Type": "application/octet-stream",
-        Cookie: sessionCookie || "",
+        Authorization: "Bearer " + jwt,
       },
       body: bytes.buffer as ArrayBuffer,
     });

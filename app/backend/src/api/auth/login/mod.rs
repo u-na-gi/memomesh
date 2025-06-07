@@ -31,10 +31,10 @@ struct CustomClaims {
 
 #[worker::send]
 pub async fn login_handler(Json(payload): Json<LoginRequest>) -> Result<Response, Infallible> {
-    // ユーザー名とパスワードを受け取る
-    let username: &String = &payload.username.into();
+    // メールアドレスとパスワードを受け取る
+    let email: &String = &payload.email.into();
     let password: &String = &payload.password.into();
-    console_log!("username: {}", username);
+    console_log!("email: {}", email);
     console_log!("password: {}", password);
 
     // ユーザーが存在するか確認（成功ケースのみ実装）

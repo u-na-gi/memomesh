@@ -23,5 +23,6 @@ services:
       - ./develop/.env
     working_dir: /workspace
     tty: true
+    
 volumes:
   cargo-target:

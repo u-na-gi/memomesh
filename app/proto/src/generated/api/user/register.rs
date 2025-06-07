@@ -2,9 +2,9 @@
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RegisterRequest {
-    /// ユーザー名
+    /// メールアドレス
     #[prost(string, tag = "1")]
-    pub username: ::prost::alloc::string::String,
+    pub email: ::prost::alloc::string::String,
     /// パスワード
     #[prost(string, tag = "2")]
     pub password: ::prost::alloc::string::String,

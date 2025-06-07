@@ -15,15 +15,17 @@ export interface QueryParameters {
   date: string;
 }
 
-export interface DataList {
-  data: Data[];
+export interface MemoList {
+  data: Memo[];
 }
 
-export interface Data {
+export interface Memo {
   /** YYYY-MM-DD形式の日付 */
   date: string;
+  /** メモのID */
+  id: string;
   /** 日付ごとのメモの数 */
-  contents: string;
+  shortContents: string;
 }
 
 function createBaseQueryParameters(): QueryParameters {
@@ -84,22 +86,22 @@ export const QueryParameters: MessageFns<QueryParameters> = {
   },
 };
 
-function createBaseDataList(): DataList {
+function createBaseMemoList(): MemoList {
   return { data: [] };
 }
 
-export const DataList: MessageFns<DataList> = {
-  encode(message: DataList, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+export const MemoList: MessageFns<MemoList> = {
+  encode(message: MemoList, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
     for (const v of message.data) {
-      Data.encode(v!, writer.uint32(10).fork()).join();
+      Memo.encode(v!, writer.uint32(10).fork()).join();
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): DataList {
+  decode(input: BinaryReader | Uint8Array, length?: number): MemoList {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseDataList();
+    const message = createBaseMemoList();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -108,7 +110,7 @@ export const DataList: MessageFns<DataList> = {
             break;
           }
 
-          message.data.push(Data.decode(reader, reader.uint32()));
+          message.data.push(Memo.decode(reader, reader.uint32()));
           continue;
         }
       }
@@ -120,47 +122,50 @@ export const DataList: MessageFns<DataList> = {
     return message;
   },
 
-  fromJSON(object: any): DataList {
-    return { data: globalThis.Array.isArray(object?.data) ? object.data.map((e: any) => Data.fromJSON(e)) : [] };
+  fromJSON(object: any): MemoList {
+    return { data: globalThis.Array.isArray(object?.data) ? object.data.map((e: any) => Memo.fromJSON(e)) : [] };
   },
 
-  toJSON(message: DataList): unknown {
+  toJSON(message: MemoList): unknown {
     const obj: any = {};
     if (message.data?.length) {
-      obj.data = message.data.map((e) => Data.toJSON(e));
+      obj.data = message.data.map((e) => Memo.toJSON(e));
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DataList>, I>>(base?: I): DataList {
-    return DataList.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<MemoList>, I>>(base?: I): MemoList {
+    return MemoList.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<DataList>, I>>(object: I): DataList {
-    const message = createBaseDataList();
-    message.data = object.data?.map((e) => Data.fromPartial(e)) || [];
+  fromPartial<I extends Exact<DeepPartial<MemoList>, I>>(object: I): MemoList {
+    const message = createBaseMemoList();
+    message.data = object.data?.map((e) => Memo.fromPartial(e)) || [];
     return message;
   },
 };
 
-function createBaseData(): Data {
-  return { date: "", contents: "" };
+function createBaseMemo(): Memo {
+  return { date: "", id: "", shortContents: "" };
 }
 
-export const Data: MessageFns<Data> = {
-  encode(message: Data, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+export const Memo: MessageFns<Memo> = {
+  encode(message: Memo, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
     if (message.date !== "") {
       writer.uint32(10).string(message.date);
     }
-    if (message.contents !== "") {
-      writer.uint32(18).string(message.contents);
+    if (message.id !== "") {
+      writer.uint32(18).string(message.id);
+    }
+    if (message.shortContents !== "") {
+      writer.uint32(26).string(message.shortContents);
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): Data {
+  decode(input: BinaryReader | Uint8Array, length?: number): Memo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseData();
+    const message = createBaseMemo();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -177,7 +182,15 @@ export const Data: MessageFns<Data> = {
             break;
           }
 
-          message.contents = reader.string();
+          message.id = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.shortContents = reader.string();
           continue;
         }
       }
@@ -189,31 +202,36 @@ export const Data: MessageFns<Data> = {
     return message;
   },
 
-  fromJSON(object: any): Data {
+  fromJSON(object: any): Memo {
     return {
       date: isSet(object.date) ? globalThis.String(object.date) : "",
-      contents: isSet(object.contents) ? globalThis.String(object.contents) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      shortContents: isSet(object.shortContents) ? globalThis.String(object.shortContents) : "",
     };
   },
 
-  toJSON(message: Data): unknown {
+  toJSON(message: Memo): unknown {
     const obj: any = {};
     if (message.date !== "") {
       obj.date = message.date;
     }
-    if (message.contents !== "") {
-      obj.contents = message.contents;
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.shortContents !== "") {
+      obj.shortContents = message.shortContents;
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Data>, I>>(base?: I): Data {
-    return Data.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<Memo>, I>>(base?: I): Memo {
+    return Memo.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<Data>, I>>(object: I): Data {
-    const message = createBaseData();
+  fromPartial<I extends Exact<DeepPartial<Memo>, I>>(object: I): Memo {
+    const message = createBaseMemo();
     message.date = object.date ?? "";
-    message.contents = object.contents ?? "";
+    message.id = object.id ?? "";
+    message.shortContents = object.shortContents ?? "";
     return message;
   },
 };

@@ -1,0 +1,55 @@
+{
+  "rustup": {
+    "install": "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh",
+    "postcommands": [
+      {
+        "command": [
+          "rustup",
+          "target",
+          "add",
+          "wasm32-unknown-unknown"
+        ]
+      }
+    ]
+  },
+  "worker-build": {
+    "install": "cargo install worker-build",
+    "depends": [
+      "rustup"
+    ]
+  },
+  "cargo-watch": {
+    "install": "cargo install cargo-watch",
+    "depends": [
+      "rustup"
+    ]
+  },
+  "protobuf": {
+    "install": "brew install protobuf"
+  },
+  "nodenv": {
+    "install": "brew install nodenv",
+    "postcommands": [
+      {
+        "command": [
+          "nodenv",
+          "install",
+          "22.13.1"
+        ]
+      },
+      {
+        "command": [
+          "nodenv",
+          "local",
+          "22.13.1"
+        ]
+      }
+    ]
+  },
+  "pnpm": {
+    "install": "npm install -g pnpm",
+    "depends": [
+      "nodenv"
+    ]
+  }
+}

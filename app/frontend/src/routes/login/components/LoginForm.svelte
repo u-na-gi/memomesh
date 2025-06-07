@@ -5,20 +5,20 @@
 	import BaseLoginInput from './LoginInput.svelte';
 	import BaseLoginLavel from './LoginLavel.svelte';
 
-	let username = '';
+	let email = '';
 	let password = '';
 	let errorMessage = '';
 	let loading = false;
 
 	const passwordInputId = 'password';
-	const usernameInputId = 'username';
+	const emailInputId = 'email';
 
 	const handleSubmit = async (): Promise<void> => {
 		loading = true;
 		errorMessage = '';
 
 		const result = await login({
-			username,
+			email,
 			password
 		});
 
@@ -40,8 +40,8 @@
 	{/if}
 	<BaseForm {loading} onSubmit={handleSubmit}>
 		<div class="mb-4">
-			<BaseLoginLavel displayLabel="ユーザー名" inputId={usernameInputId} />
-			<BaseLoginInput inputId={usernameInputId} bind:value={username} />
+			<BaseLoginLavel displayLabel="メールアドレス" inputId={emailInputId} />
+			<BaseLoginInput inputId={emailInputId} bind:value={email} />
 		</div>
 
 		<div class="mb-6">

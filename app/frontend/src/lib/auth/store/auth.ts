@@ -6,7 +6,7 @@ import { goto } from '$app/navigation';
 import { env } from '$env/dynamic/public';
 
 const loginRequestSchema = zod.object({
-	username: zod.string().min(1, 'Username is required'),
+	email: zod.string().email('Valid email is required').min(1, 'Email is required'),
 	password: zod.string().min(1, 'Password is required')
 });
 
@@ -52,9 +52,9 @@ export const login = async (req: LoginRequest): Promise<Result<LoginResponse, Lo
 export const logout = async (): Promise<Result<void, LogoutError>> => {
 	try {
 		// ログアウトエンドポイントを呼び出し
-		const endpoint = `${env.PUBLIC_API_BASE_URL}/api/v1/auth/logout`;
+		const endpoint = `${env.PUBLIC_API_BASE_URL}/auth/logout`;
 		const result = await fetch(endpoint, {
-			method: 'POST',
+			method: 'DELETE',
 			credentials: 'include'
 		});
 

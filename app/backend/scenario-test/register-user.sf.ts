@@ -10,7 +10,7 @@ export const registerUser = new ScenarioFlow("Register User Flow", {
   apiBaseUrl: baseUrl,
 }).step("Register User", async (ctx) => {
   let req: RegisterRequest = {
-    username: "test",
+    email: "test@example.com",
     password: "test",
   };
   req = RegisterRequest.create(req);
@@ -33,7 +33,7 @@ export const registerUser = new ScenarioFlow("Register User Flow", {
   console.log("Register response:", response);
 
   ctx.addContext("user", {
-    username: req.username,
+    email: req.email,
     password: req.password,
   });
 });

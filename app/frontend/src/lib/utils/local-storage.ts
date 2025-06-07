@@ -17,3 +17,10 @@ export const setItemToLocalStorage = (key: string, value: string): void => {
 	}
 	localStorage.setItem(key, value);
 };
+
+export const removeItemFromLocalStorage = (key: string): void => {
+	if (!isSsr()) {
+		return;
+	}
+	localStorage.removeItem(key);
+};

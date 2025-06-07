@@ -22,7 +22,6 @@ else
   echo "Skipping pnpm install (node_modules already populated)"
 fi
 
-#protocのpathを通す
-node ./develop/updateProtoc.js
+
 
 

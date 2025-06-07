@@ -9,7 +9,7 @@ export const login = new ScenarioFlow("Login Flow", registerUser).step(
   async (ctx) => {
     const payload = ctx.getContext("user") as RegisterRequest;
     const req: LoginRequest = {
-      username: payload.username,
+      email: payload.email,
       password: payload.password,
     };
     const res = await ctx.fetcher({
@@ -28,13 +28,15 @@ export const login = new ScenarioFlow("Login Flow", registerUser).step(
 
     const cookies = res.headers.getSetCookie();
 
-    console.log("Login successful:", data);
-
     ctx.addContext("cookies", cookies);
     cookies.forEach((cookie) => {
       const [name, value] = cookie.split(";")[0].split("=");
       ctx.addContext(name, `${name}=${value}`);
     });
+
+    ctx.addContext("jwt", data.jwt);
+
+    console.log("Login successful:", ctx);
   }
 );
 

@@ -9,17 +9,20 @@ pub struct QueryParameters {
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DataList {
+pub struct MemoList {
     #[prost(message, repeated, tag = "1")]
-    pub data: ::prost::alloc::vec::Vec<Data>,
+    pub data: ::prost::alloc::vec::Vec<Memo>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Data {
+pub struct Memo {
     /// YYYY-MM-DD形式の日付
     #[prost(string, tag = "1")]
     pub date: ::prost::alloc::string::String,
-    /// 日付ごとのメモの数
+    /// メモのID
     #[prost(string, tag = "2")]
-    pub contents: ::prost::alloc::string::String,
+    pub id: ::prost::alloc::string::String,
+    /// 日付ごとのメモの数
+    #[prost(string, tag = "3")]
+    pub short_contents: ::prost::alloc::string::String,
 }

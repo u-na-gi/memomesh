@@ -1,7 +1,7 @@
 import { ScenarioFlow } from "scenario-flow";
 
 import { createMemo } from "./memo-create.sf.ts";
-import { DataList } from "./types/src/api/memo/get_data.ts";
+import { MemoList } from "./types/src/api/memo/get_data.ts";
 
 export const getMemoData = new ScenarioFlow(
   "Get Memo Data Flow",
@@ -10,12 +10,13 @@ export const getMemoData = new ScenarioFlow(
   // 今日の日付を YYYY-MM-DD 形式で取得
   const today = new Date().toISOString().split("T")[0];
 
-  const sessionCookie = ctx.getContext("session") as string;
+  const jwt = ctx.getContext("jwt") as string;
   const res = await ctx.fetcher({
     method: "GET",
     path: `/memo/data?date=${today}`,
     headers: {
-      Cookie: sessionCookie || "",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${jwt}`,
     },
   });
 
@@ -25,7 +26,7 @@ export const getMemoData = new ScenarioFlow(
 
   const data = await res.arrayBuffer();
   const uint8 = new Uint8Array(data);
-  const response = DataList.decode(uint8);
+  const response = MemoList.decode(uint8);
   console.log("Get memo data response:", response);
 
   // 作成したメモが取得できているかを確認
@@ -34,7 +35,7 @@ export const getMemoData = new ScenarioFlow(
     contents: string;
   };
   const foundMemo = response.data.find(
-    (memo) => memo.contents === createdMemo.contents
+    (memo) => memo.shortContents === createdMemo.contents
   );
 
   if (!foundMemo) {
