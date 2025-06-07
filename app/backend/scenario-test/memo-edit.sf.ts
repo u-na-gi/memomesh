@@ -21,13 +21,13 @@ export const editMemo = new ScenarioFlow("Edit Memo Flow", createMemo).step(
     req = EditMemoRequest.create(req);
     const bytes = EditMemoRequest.encode(req).finish();
 
-    const sessionCookie = ctx.getContext("session") as string;
+    const jwt = ctx.getContext("jwt") as string;
     const res = await ctx.fetcher({
       method: "POST",
       path: "/memo/edit",
       headers: {
         "Content-Type": "application/octet-stream",
-        Cookie: sessionCookie || "",
+        Authorization: `Bearer ${jwt}`,
       },
       body: bytes.buffer as ArrayBuffer,
     });

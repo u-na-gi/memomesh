@@ -28,8 +28,6 @@ export const login = new ScenarioFlow("Login Flow", registerUser).step(
 
     const cookies = res.headers.getSetCookie();
 
-    console.log("Login successful:", data);
-
     ctx.addContext("cookies", cookies);
     cookies.forEach((cookie) => {
       const [name, value] = cookie.split(";")[0].split("=");
@@ -37,6 +35,8 @@ export const login = new ScenarioFlow("Login Flow", registerUser).step(
     });
 
     ctx.addContext("jwt", data.jwt);
+
+    console.log("Login successful:", ctx);
   }
 );
 

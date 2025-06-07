@@ -2,6 +2,7 @@ import { CreateMemoRequest } from '$lib/types/src/api/memo/create';
 import { CountNotesByDateList } from '$lib/types/src/api/memo/get_count_by_date';
 import { env } from '$env/dynamic/public';
 import { MemoList, type QueryParameters } from '$lib/types/src/api/memo/get_data';
+import { GetMemoByIdResponse } from '$lib/types/src/api/memo/get_by_id';
 
 export const getDataByDate = async (
 	from_date: string,
@@ -73,5 +74,29 @@ export const getMemoByDate = async (query: QueryParameters): Promise<MemoList> =
 	const data = await result.arrayBuffer();
 	const uint8 = new Uint8Array(data);
 	const decode = MemoList.decode(uint8);
+	return decode;
+};
+
+export const getMemoById = async (id: string): Promise<GetMemoByIdResponse> => {
+	const endpoint = `${env.PUBLIC_API_BASE_URL}/memo/id?id=${id}`;
+
+	const result = await fetch(endpoint, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${localStorage.getItem('jwt') || ''}`
+		}
+	});
+
+	if (!result.ok) {
+		throw new Error('Failed to fetch memo by id');
+	}
+	console.log('Response status:', result.status);
+	console.log('Response headers:', result.headers.get('Content-Type'));
+	console.log('Response URL:', result.url);
+
+	const data = await result.arrayBuffer();
+	const uint8 = new Uint8Array(data);
+	const decode = GetMemoByIdResponse.decode(uint8);
 	return decode;
 };
